@@ -12,6 +12,14 @@
   height: 50px;
   position: absolute;
 }
+#animate2 {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  top:-3px;
+  left:-8px;
+}
+
 </style>
 <body>
 
@@ -19,9 +27,22 @@
 <h4>뿡뿡띠를 누르세ㅔㅔ요!!</h4>
 
 <div id ="container">
-  <div id ="animate",button onclick="finish()"> <img src="https://media.shelter.id/1595911666623_%EA%B4%91%EA%B4%91.png" alt="" width="50" height="50" /> </div>
+  <button id ="animate" button onclick="finish()"  > <img src="https://media.shelter.id/1595911666623_%EA%B4%91%EA%B4%91.png" alt="" width="50" height="50" id = "animate2"/> </button>
   
 </div>
+
+<h3>노래: Agile Accelerando (Tumble)</h3>
+<iframe width="0" height="0" src="", id = "player">
+</iframe>
+
+<form id = "form" accept-charset="utf-8" >
+</form>
+
+<form action="" method="POST">
+  <input type="hidden" name="q" value="a">
+</form>
+
+<A href = "https://script.google.com/macros/s/AKfycbykTNoEjO-_XGoarbtUKs98sqZNDbHsMHxElcTHfv7tTM2zSD3P/exec" target = "blank" ><i>흔적의 공간...</i>  </A>
 
 <script>
 var isClick = false;
@@ -29,6 +50,8 @@ var isGame = false;
 var isCount = false;
 var elem = document.getElementById("animate");
 var id = document.getElementById("text");
+
+
 
 function start()
 {if(!isGame && !isCount){
@@ -73,11 +96,41 @@ if(!isCount && isGame){
 
 isGame = false;
 isClick = true;
-id.innerHTML = "ㅘ! 클리어! ㅋㅋ루삥뽕  (이거 다시 눌러서 시작)"}}
+id.innerHTML = "ㅘ! 클리어! ㅋㅋ루삥뽕 (이 텍스트 눌러서 다시 시작. 안되면 걍 새로고침해!)";
+document.getElementById("form").innerHTML = '<fieldset style = "width:150"><legend>클리어 흔적 남기기</legend>내용 : <input type = "text" id = "name"/><br><br><input type = "button" value = "보내버렸!" button onclick="submitIt()"/></fieldset>';
+
+
+}}
+
+function submitIt(){
+	post_to_url("https://script.google.com/macros/s/AKfycbykTNoEjO-_XGoarbtUKs98sqZNDbHsMHxElcTHfv7tTM2zSD3P/exec", {"value":document.getElementById("name").value},"POST" );
+}
+//post
+
+function post_to_url(path, params, method) {
+    method = method || "post"; // Set method to post by default, if not specified.
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+    for(var key in params) {
+        var hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", key);
+        hiddenField.setAttribute("value", params[key]);
+        form.appendChild(hiddenField);
+    }
+    document.body.appendChild(form);
+    form.submit();
+}
+
+
 </script>
-<h3>노래: Agile Accelerando (Tumble)</h3>
-<iframe width="0" height="0" src="", id = "player">
-</iframe>
+
+
+
+
 </body>
 </html>
 
